@@ -97,7 +97,7 @@
                 android:id="@+id/blowOutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Extinguish" />
+                android:text="BlowOut" />
 
             <Button
                 android:id="@+id/goodbyeButton"
