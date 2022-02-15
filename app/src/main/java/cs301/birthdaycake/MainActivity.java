@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private View blowOut;
     private CompoundButton candles;
     private SeekBar candleNum;
+    private View userTouch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         candleNum = findViewById(R.id.candleAmount);
         candleNum.setOnSeekBarChangeListener(newCake);
+
+        userTouch = findViewById(R.id.cakeview);
+        userTouch.setOnTouchListener(newCake);
+
     }
 
     public void goodbye(View Button) {

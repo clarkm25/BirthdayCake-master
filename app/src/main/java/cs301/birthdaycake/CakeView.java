@@ -16,6 +16,9 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint textPaint = new Paint();
+    Paint redBox = new Paint();
+    Paint greenBox = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -62,6 +65,13 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        textPaint.setColor(Color.RED);
+        textPaint.setStyle(Paint.Style.FILL);
+        textPaint.setTextSize(36);
+        redBox.setColor(Color.RED);
+        redBox.setStyle(Paint.Style.FILL);
+        greenBox.setColor(Color.GREEN);
+        greenBox.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -100,8 +110,7 @@ public class CakeView extends SurfaceView {
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -129,9 +138,27 @@ public class CakeView extends SurfaceView {
                 drawCandle(canvas, (cakeLeft + (cakeWidth / 3) + cakeLeft * i), cakeTop);
             }
         }
+
+        this.drawLocation(canvas, cakeOne.xLocation, cakeOne.yLocation);
+
+        if((cakeOne.xLocation != 0) && (cakeOne.yLocation != 0)) {
+            this.drawCheckerBoard(canvas, cakeOne.xLocation, cakeOne.yLocation);
+        }
     }//onDraw
 
     public CakeModel getCake() {
         return cakeOne;
+    }
+
+    public void drawLocation(Canvas canvas, float initX, float initY) {
+        canvas.drawText("The 'x' location is: " + initX,1600.0f,650.0f,textPaint);
+        canvas.drawText("The 'y' location is: " + initY,1600.0f,680.0f,textPaint);
+    }
+
+    public void drawCheckerBoard(Canvas canvas, float initX, float initY) {
+        canvas.drawRect(initX,initY,initX+100,initY+100,greenBox);
+        canvas.drawRect(initX,initY-100,initX+100,initY,redBox);
+        canvas.drawRect(initX-100,initY-100,initX,initY,greenBox);
+        canvas.drawRect(initX-100,initY,initX,initY+100,redBox);
     }
 }//class CakeView
